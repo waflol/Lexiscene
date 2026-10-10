@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# builds
+dist/
+build/
+.next/
+.turbo/
+coverage/
+*.tsbuildinfo
+
+# env and secrets
+.env
+.env.local
+.env.*.local
+
+# local data
+.data/
+mongo-data/
+redis-data/
+tmp/
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Claude Code personal settings (shared settings.json stays tracked)
+.claude/settings.local.json
+.claude/settings.json
