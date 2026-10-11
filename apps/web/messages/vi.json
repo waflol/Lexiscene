@@ -1,0 +1,10 @@
+{
+  "Home": {
+    "title": "Lexiscene",
+    "welcome": "Chào mừng đến với Lexiscene"
+  },
+  "Health": {
+    "status": "Trạng thái",
+    "ok": "Hoạt động tốt"
+  }
+}
