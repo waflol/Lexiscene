@@ -20,6 +20,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
 
+      - run: pnpm approve-builds --yes || true
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm -r typecheck
@@ -36,6 +37,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
-
+          
+      - run: pnpm approve-builds --yes || true
       - run: pnpm install --frozen-lockfile
       - run: pnpm -r test

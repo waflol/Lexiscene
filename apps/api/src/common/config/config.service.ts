@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService as NestConfigService } from '@nestjs/config';
+import type { ConfigService as NestConfigService } from '@nestjs/config';
 import { Env } from './schema.js';
 
 @Injectable()
@@ -8,13 +8,5 @@ export class ConfigService {
 
   get<T extends keyof Env>(key: T): Env[T] {
     return this.configService.get(key, { infer: true });
-  }
-
-  getOrThrow<T extends keyof Env>(key: T): Env[T] {
-    const value = this.configService.get(key, { infer: true });
-    if (value === undefined) {
-      throw new Error(`Missing required env: ${key}`);
-    }
-    return value;
   }
 }
