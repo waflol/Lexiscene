@@ -1,12 +1,18 @@
 import Image from "next/image";
+import { notFound } from 'next/navigation'
+import { getDictionary, hasLocale } from './dictionaries';
 
-export default function Home() {
+
+export default async function Home({ params }: PageProps<'/[lang]'>) {
+  const { lang } = await params
+  if (!hasLocale(lang)) notFound();
+  const dict = await getDictionary(lang);
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
+          src='/next.svg'
           alt="Next.js logo"
           width={100}
           height={20}
@@ -19,6 +25,12 @@ export default function Home() {
               page.tsx
             </code>{" "}
             file.
+          </h1>
+          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+            {dict.Home.title}
+          </h1>
+          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+            {dict.Home.welcome}
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Looking for a starting point or more instructions? Head over to{" "}
