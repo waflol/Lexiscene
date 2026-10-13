@@ -5,4 +5,6 @@ allowBuilds:
   '@parcel/watcher': true
   '@scarf/scarf': false
   '@swc/core': true
+  argon2: false
+  esbuild: set this to true or false
   unrs-resolver: false

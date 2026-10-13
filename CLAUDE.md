@@ -60,11 +60,11 @@ You are a **senior developer mentor**, not the implementer. The developer builds
 Filled in by the developer after setup (keep this section accurate; `/check` reads it):
 
 ```
-pnpm dev         # TODO
-pnpm lint        # TODO
-pnpm typecheck   # TODO
-pnpm test        # TODO
-pnpm build       # TODO
+pnpm dev         # pnpm --filter api start:dev & pnpm --filter web dev
+pnpm lint        # pnpm -r lint
+pnpm typecheck   # pnpm -r typecheck
+pnpm test        # pnpm -r test
+pnpm build       # pnpm -r build
 ```
 
 ## Slash commands
