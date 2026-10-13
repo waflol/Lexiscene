@@ -2,8 +2,11 @@ import Image from "next/image";
 import { notFound } from 'next/navigation'
 import { getDictionary, hasLocale } from './dictionaries';
 
+type PageProps = {
+  params: Promise<{ lang: string }>;
+};
 
-export default async function Home({ params }: PageProps<'/[lang]'>) {
+export default async function Home({ params }: PageProps) {
   const { lang } = await params
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
