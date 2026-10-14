@@ -14,7 +14,7 @@ export class RedisHealthIndicator {
     return this.indicator.check(key).attempt(async () => {
       const reply = await this.redis.ping();
       if (typeof reply !== 'string' || reply !== 'PONG') {
-        throw new Error(`Unexpected reply: ${reply}`);
+        throw new Error(`Unexpected reply: ${String(reply)}`);
       }
       return { reply };
       // signal.timeout() nếu cần dừng sớm; ioredis không hỗ trợ AbortSignal nên bỏ qua

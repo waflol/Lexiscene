@@ -2,10 +2,13 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module.js';
 import { ConfigService } from './common/config/config.service.js';
+import { ProblemJsonFilter } from './common/filters/problem-json.filter.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.useGlobalFilters(new ProblemJsonFilter());
+  
   const configService = app.get(ConfigService);
   const port = configService.get('PORT');
 
