@@ -1,17 +1,21 @@
 import { Controller, Get } from '@nestjs/common';
+import { HealthCheck, HealthCheckService, MongooseHealthIndicator } from '@nestjs/terminus';
+import { RedisHealthIndicator } from './redis.health.js';
 
 @Controller('health')
 export class HealthController {
-  @Get()
-  check() {
-    return { status: 'ok', timestamp: new Date().toISOString() };
-  }
+  constructor(
+    private readonly health: HealthCheckService,
+    private readonly mongo: MongooseHealthIndicator,
+    private readonly redis: RedisHealthIndicator,
+  ) {}
 
-  @Get('ready')
-  ready() {
-    return {
-      status: 'ok',
-      checks: { mongodb: 'pending', redis: 'pending' },
-    };
+  @Get()
+  @HealthCheck()
+  dbCheck() {
+    return this.health.check([
+      () => this.mongo.pingCheck('mongo'),
+      () => this.redis.ping('redis'),
+    ]);
   }
 }

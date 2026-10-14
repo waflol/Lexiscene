@@ -6,9 +6,18 @@ import { HealthModule } from './health/health.module.js';
 import { UsersModule } from './users/users.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { RedisModule } from './common/redis/redis.module.js';
+import { DatabaseModule } from './common/database/database.module.js';
 
 @Module({
-  imports: [ConfigModule, HealthModule, UsersModule, AuthModule, RedisModule],
+  imports: [
+    ConfigModule,
+    DatabaseModule,
+    HealthModule,
+    UsersModule,
+    AuthModule,
+    RedisModule,
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

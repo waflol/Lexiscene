@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
+
+type RootLayoutProps = {
+  children: ReactNode;
+  params: Promise<{ lang: string }>;
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +30,7 @@ export async function generateStaticParams() {
 export default async function RootLayout({
   children,
   params,
-}: LayoutProps<'/[lang]'>) {
+}: RootLayoutProps) {
   return (
     <html
       lang={(await params).lang}
