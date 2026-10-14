@@ -1,6 +1,6 @@
 # Kiến trúc (Architecture) - Lexiscene
 
-> Last updated: 2026-10-10 | Status: draft | English: [../en/architecture.md](../en/architecture.md)
+> Last updated: 2026-10-14 | Status: draft | English: [../en/architecture.md](../en/architecture.md)
 
 ## 1. Bối cảnh hệ thống
 
@@ -138,6 +138,7 @@ Quy tắc: controller mỏng; service chứa logic; repository (Mongoose model) 
 - Theo dõi lỗi (vd. Sentry) cho web, api, worker.
 - Metrics: độ trễ request, độ sâu queue, thời lượng/tỉ lệ lỗi job, chi phí ASR theo phút.
 - Health: `GET /health` (liveness) và `/health/ready` (Mongo + Redis).
+- Errors: `ProblemJsonFilter` global định dạng 4xx/5xx thành `application/problem+json` (RFC 9457). 5xx log đầy đủ stack qua pino; client nhận 500 generic, không lộ chi tiết nội bộ.
 
 ## 12. Chiến lược kiểm thử
 

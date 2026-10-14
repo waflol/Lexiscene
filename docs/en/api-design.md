@@ -1,6 +1,6 @@
 # API Design - Lexiscene
 
-> Last updated: 2026-10-10 | Status: draft | Vietnamese: [../vi/api-design.md](../vi/api-design.md)
+> Last updated: 2026-10-14 | Status: draft | Vietnamese: [../vi/api-design.md](../vi/api-design.md)
 
 ## 1. Conventions
 
@@ -16,6 +16,7 @@
 | Rate limit | `429` with `Retry-After`; stricter on `/auth/*`, `/dictionary/lookup-batch` |
 | Docs | OpenAPI served at `/api/docs` (generated from NestJS decorators; used to generate the web client) |
 | Validation | zod schemas from `packages/shared`; unknown fields rejected |
+| Validation errors | `errors[]` items: `{ path, message }`. `path` is dot-notation from zod issue path. `detail` (optional) is server-controlled English |
 
 Error example:
 

@@ -1,6 +1,6 @@
 # Architecture - Lexiscene
 
-> Last updated: 2026-10-10 | Status: draft | Vietnamese: [../vi/architecture.md](../vi/architecture.md)
+> Last updated: 2026-10-14 | Status: draft | Vietnamese: [../vi/architecture.md](../vi/architecture.md)
 
 ## 1. System context
 
@@ -138,6 +138,7 @@ Rules: thin controllers; services hold logic; repositories (Mongoose models) are
 - Error tracking (e.g. Sentry) for web, api, worker.
 - Metrics: request latency, queue depth, job duration/failure, ASR cost per minute.
 - Health: `GET /health` (liveness) and `/health/ready` (Mongo + Redis).
+- Errors: global `ProblemJsonFilter` formats 4xx/5xx as `application/problem+json` (RFC 9457). 5xx logged with full stack via pino; client gets generic 500 with no internal detail.
 
 ## 12. Testing strategy
 
