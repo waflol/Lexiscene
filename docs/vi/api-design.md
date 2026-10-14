@@ -15,7 +15,8 @@
 | Idempotency | Header `Idempotency-Key` cho `POST /billing/checkout-sessions` (và mọi POST thanh toán sau này) |
 | Rate limit | `429` kèm `Retry-After`; chặt hơn cho `/auth/*`, `/dictionary/lookup-batch` |
 | Tài liệu | OpenAPI tại `/api/docs` (sinh từ decorator NestJS; dùng để sinh client cho web) |
-| Validation | zod schema từ `packages/shared`; từ chối trường không biết |
+| Validation | zod schemas từ `packages/shared`; loại bỏ field lạ |
+| Validation errors | `errors[]` gồm: `{ path, message }`. `path` là dot-notation từ zod issue path. `detail` (tùy chọn) do server kiểm soát, tiếng Anh |
 
 Ví dụ lỗi:
 
