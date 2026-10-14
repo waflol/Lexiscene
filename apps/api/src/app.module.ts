@@ -16,7 +16,6 @@ import { DatabaseModule } from './common/database/database.module.js';
     UsersModule,
     AuthModule,
     RedisModule,
-    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
