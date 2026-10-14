@@ -7,7 +7,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as argon2 from 'argon2';
-import type { CreateUserInput } from './dto/create-user.input.js';
+import type { CreateUserDto } from './dto/create-user.dto.js';
 import { User, UserDocument } from './entities/user.entity.js';
 
 // OWASP minimums for argon2id (2024 cheat sheet). Pinned so a future
@@ -23,29 +23,29 @@ const ARGON2_OPTS = {
 export class UsersService {
   private readonly logger = new Logger(UsersService.name);
 
-  constructor(@InjectModel(User.name) private readonly model: Model<UserDocument>) {}
+  constructor(@InjectModel(User.name) private readonly user: Model<UserDocument>) {}
 
   // Lower-case + trim here so callers can pass raw user input. We also
   // gate the lookup through the Mongoose model's collation-free path; the
   // `lowercase: true` in the schema means any write that bypassed this
   // service is also normalized, so this stays correct.
   async findByEmail(email: string): Promise<UserDocument | null> {
-    return this.model.findOne({ email: email.toLowerCase().trim() }).exec();
+    return this.user.findOne({ email: email.toLowerCase().trim() }).exec();
   }
 
   async findById(id: string): Promise<UserDocument | null> {
-    return this.model.findById(id).exec();
+    return this.user.findById(id).exec();
   }
 
   // Creates a new user with an argon2id password hash. Translates the unique
   // index violation (E11000) into a 409 Conflict so the global filter can
   // format it as problem+json. Other errors bubble up.
-  async createWithPassword(input: CreateUserInput): Promise<UserDocument> {
+  async createWithPassword(input: CreateUserDto): Promise<UserDocument> {
     const email = input.email.trim().toLowerCase();
     const passwordHash = await argon2.hash(input.password, ARGON2_OPTS);
 
     try {
-      const created = await this.model.create({
+      const created = await this.user.create({
         email,
         passwordHash,
         profile: {

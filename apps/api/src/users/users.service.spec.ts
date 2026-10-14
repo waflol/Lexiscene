@@ -2,7 +2,7 @@ import { ConflictException } from '@nestjs/common';
 import { Types } from 'mongoose';
 import { UsersService } from './users.service.js';
 import type { UserDocument } from './entities/user.entity.js';
-import type { CreateUserInput } from './dto/create-user.input.js';
+import type { CreateUserDto } from './dto/create-user.dto.js';
 
 // Helper: build a fake `UserDocument` for assertions. We only stub the
 // fields the service actually reads; the rest stays undefined.
@@ -40,7 +40,7 @@ function fakeModel() {
   };
 }
 
-const baseInput: CreateUserInput = {
+const baseInput: CreateUserDto= {
   email: 'User@Example.com',
   password: 'correct horse battery staple',
   uiLocale: 'vi',

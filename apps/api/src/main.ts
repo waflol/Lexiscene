@@ -15,9 +15,12 @@ async function bootstrap() {
   // Swagger setup
   const config = new DocumentBuilder()
     .setTitle('Lexiscene API')
-    .setDescription('Vocabulary-learning API')
+    .setDescription('Vocabulary-learning API for vocabulary learning with video transcripts')
     .setVersion('1.0')
-    .addTag('health')
+    .addTag('auth', 'Authentication endpoints')
+    .addTag('health', 'Health check endpoints')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'access-token')
+    .addCookieAuth('refreshToken', { type: 'apiKey', in: 'cookie' }, 'refresh-token')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
